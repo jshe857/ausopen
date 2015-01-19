@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>KIA Stand Stats</title>
+	<link href="css/style.min.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript" src="libs/angular.min.js"></script>             
+<!--[if lte IE 8]>
+    <script src="libs/jquery-1.11.1.min.js"></script>
+    <![endif]-->
+    <!--[if gte IE 9 | !IE] -->   
+    <script src="libs/jquery-2.1.1.min.js"></script>
+
+
+
+</head>
+
+<body ng-app="app">
+	<noscript>
+		<style type="text/css">
+		#content { display:none; }
+		</style>
+	</noscript>
+	<div class="head"></div>
+	<div id="content" class="contentContainer">
+		<span>A daily indication of the crowds at the KIA stand based on detected WiFi devices.</span>
+		<div ng-controller="KiaOpsController" class="main">
+			<div class="dateSelection"><form><fieldset><legend>Date Selection</legend><label for="date">Date</label><select id="date" name="Date Selection">
+				
+				<option ng-repeat="date in dates">{{utils.formatDate(date)}}</option>
+			</select>
+
+				<input type="submit" ng-click="utils.getKiaData()" id="dateSearch" class="primaryButton" value="Search">
+			</fieldset></form></div>
+			<div class="label">Total visitors during the event</div><div class="value">{{kia.uuid_event}}</div>
+			<div class="label">Unique visitors today</div><div class="value">{{kia.uuid_today}}</div>
+			<div class="label">Returning visitors</div><div class="value">{{kia.uuid_return}}</div>		
+			<div class="label">Average visit time</div><div class="value">{{kia.uuid_dwell}} mins</div>
+			<div class="label">Busiest time</div><div class="value">{{kia.uuid_site_busy_hour_nbr}}:00</div>
+			<div class="label">Visitors during the busiest time</div><div class="value">{{kia.uuid_site_busy_hour_total}}</div>
+			<div class="IBMHorizon"><img src="images/ibmLogo_white_horiz.png" width="155" height="46" alt="IBM Logo" /></div>
+		</div>
+	</div>
+
+<script src="js/kia_scripts.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "Aus2015FanTracker",
+  "description": "Australian Open 2015 Fan Tracker",
+  "version": "0.1.0",
+  "author": "Katie Barnett",
+  "private": true,
+  "devDependencies": {
+    "connect-php": "0.0.1",
+    "grunt": "~0.4.x",
+    "grunt-contrib-clean": "~0.5.x",
+    "grunt-contrib-concat": "~0.4.x",
+    "grunt-contrib-connect": "~0.7.x",
+    "grunt-contrib-copy": "~0.5.x",
+    "grunt-contrib-cssmin": "~0.10.x",
+    "grunt-contrib-less": "~0.11.x",
+    "grunt-contrib-rename": "0.0.3",
+    "grunt-contrib-uglify": "~0.5.x",
+    "grunt-contrib-watch": "~0.6.x",
+    "grunt-newer": "^0.8.0"
+  }
+}
