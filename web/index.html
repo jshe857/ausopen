@@ -26,9 +26,12 @@
 	<div id="content" class="contentContainer">
 		<span>A daily indication of the crowds at the KIA stand based on detected WiFi devices.</span>
 		<div ng-controller="KiaOpsController" class="main">
-			<div class="dateSelection"><form><fieldset><legend>Date Selection</legend><label for="date">Date</label><select id="date" name="Date Selection">
+			<div class="dateSelection"><form><fieldset><legend>Date Selection</legend><label for="date">Date</label>
+
+
+				<select id="date" name="Date Selection" ng-model="selectedDate" ng-options="utils.formatDate(date) for date in dates">
 				
-				<option ng-repeat="date in dates">{{utils.formatDate(date)}}</option>
+				<!-- <option ng-repeat="date in dates">{{utils.formatDate(date)}}</option> -->
 			</select>
 
 				<input type="submit" ng-click="utils.getKiaData()" id="dateSearch" class="primaryButton" value="Search">

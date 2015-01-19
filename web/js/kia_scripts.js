@@ -2,49 +2,42 @@
 var app = angular.module('app', [])
 
 app.controller('KiaOpsController',function($scope,$http) {
-    $scope.kia = {}
-    $scope.utils = {}
+    $scope.kia = {};
+    $scope.utils = {};
 
     if (new Date() <= end_date) {
-        $scope.dates = getDates(start_date, new Date())
+        $scope.dates = getDates(start_date, new Date());
     } else {
-        $scope.dates = getDates(start_date, end_date)
+        $scope.dates = getDates(start_date, end_date);
     }
 
     //make selected date the latest one
-    console.log($scope.dates.length)
-    document.getElementById("date").selectedIndex = $scope.dates.length - 1
-    $('#date').trigger('change');
+    $scope.selectedDate = $scope.dates[$scope.dates.length - 1];
 
     $scope.utils.getKiaData = function() {
-     var index = document.getElementById("date").selectedIndex
-     if (index < 0) {
-        index = 0
-     }
-
-     var date = $scope.dates[index]
-     var dateStr = date.getFullYear() + "-" + date.getMonth()+1 + "-" + date.getDate()
-     var url = '/AusOpenSocialWEB/ausopenSocial/ausopenStats?date='+dateStr+'&time=23:57'
+     var date = $scope.selectedDate;
+     var dateStr = date.getFullYear() + "-" + date.getMonth()+1 + "-" + date.getDate();
+     var url = '/AusOpenSocialWEB/ausopenSocial/ausopenStats?date='+dateStr+'&time=23:57';
      var jsonCallback = "&callback=JSON_CALLBACK";
-     var myUrl = host+url+jsonCallback    
+     var myUrl = host+url+jsonCallback;    
 
      $http.jsonp(myUrl, {timeout: HTTP_TIMEOUT}).
      success(function(data, status, headers, config) {
         if (data){
-            var nodes = data.nodedata
-            var kia_data = {}
+            var nodes = data.nodedata;
+            var kia_data = {};
             for (var i = nodes.length - 1; i >= 0; i--) {
                 if (nodes[i].node === "KIA X-Car Display") {
-                    kia_data = nodes[i]
-                    $scope.kia = kia_data
+                    kia_data = nodes[i];
+                    $scope.kia = kia_data;
                     break;
                 }
             };
         } else {
-            $scope.kia.uuid_dwell = "n/a"
-            $scope.kia.uuid_site_busy_hour_nbr = "0"
+            $scope.kia.uuid_dwell = "n/a";
+            $scope.kia.uuid_site_busy_hour_nbr = "0";
             console.log("Can't find data");
-            alert("The service is currently unavailable. Please try again later.")
+            alert("The service is currently unavailable. Please try again later.");
         }
 
     }).
@@ -54,7 +47,7 @@ app.controller('KiaOpsController',function($scope,$http) {
 
     }
 
-    $scope.utils.getKiaData()
+    $scope.utils.getKiaData();
 
 
     $scope.utils.formatDate = function(date){
